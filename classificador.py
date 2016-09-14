@@ -123,14 +123,14 @@ def f1_from_confusion(c):
 
 
 
-def model_comparison(features, labels, models, parameters_to_optimize, gender_parameter):
+def model_comparison(features, labels, models, parameters_to_optimize, genre_parameter):
     #norm_features = normalize(features)
-    # print (gender_parameter)
+    # print (genre_parameter)
     features = np.array(features)
-    # print (features)
-    #use gender as a parameter
-    if gender_parameter == True:
-        gender_parameter = True
+    print (features)
+    #use genre as a parameter
+    if genre_parameter == True:
+        genre_parameter = True
     skf = StratifiedKFold(labels, n_folds=10)
 
     f1 = np.zeros((10,len(models)))
@@ -179,11 +179,11 @@ parameters_to_optimize = [params_knn, params_svm]
 
 models = [KNeighborsClassifier(), SVC(class_weight='balanced')]
 
-#using model_comparison without gender as a feature
+#using model_comparison without genre as a feature
 recall, precision, f1_score = model_comparison(features, label_to_numbers(labels, dataset_class_histogram(dataset)), models, parameters_to_optimize, False)
 
-#printing results without gender as a parameter
-print ("Gender is not a feature \n")
+#printing results without genre as a parameter
+print ("without genre as a parameter \n Score \n")
 print np.average(f1_score, axis=0)
 
 if len(models) > 2:
@@ -196,11 +196,11 @@ else:
     print "T-test:", ttest( f1_score[:,0].T,  f1_score[:,1].T)[1]
 
 
-# #using model_comparison with gender as a feature
+# #using model_comparison with genre as a feature
 # recall, precision, f1_score = model_comparison(features, label_to_numbers(labels, dataset_class_histogram(dataset)), models, parameters_to_optimize, True)
 
-# #printing results with gender as a parameter
-# print ("Gender is a feature \n")
+# #printing results with genre as a parameter
+# print ("genre is a feature \n")
 # print np.average(f1_score, axis=0)
 
 # if len(models) > 2:
